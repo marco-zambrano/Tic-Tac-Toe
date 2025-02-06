@@ -1,42 +1,77 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.board {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+h1 {
+    margin: 0;
+    color: #EEEEEE;
+    font-size: 2.5rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.game {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 350px;
+    gap: 10px;
+    width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.square {
+    background-color: #D84040;
+    color: #EEEEEE;
+    font-size: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    line-height: normal;
+    transition: .3s all ease;
+}
+.square:hover {
+    transform: scale(1.04);
 }
 
-.card {
-  padding: 2em;
+
+.turn-container {
+    display: flex;
+    column-gap: 27px;
+    margin-top: 10px;
+}
+.square.turn {
+    font-size: 2rem;
+    background-color: transparent;
+    height: 70px;
+    width: 70px;
+    border: 1px solid #EEEEEE;
+    cursor: auto;
+}
+.square.turn:hover {
+    transform: none
 }
 
-.read-the-docs {
-  color: #888;
+.square.turn.turn--is-selected {
+    background-color: #EEEEEE;
+    color: #000;
+}
+
+@media screen and (max-width: 400px) {
+    .board {
+        width: 300px;
+    }
+
+    .game {
+        height: 300px;
+    }
+
+    .square.turn {
+        height: 60px;
+        width: 60px;
+        font-size: 1.8rem;
+    }
 }
