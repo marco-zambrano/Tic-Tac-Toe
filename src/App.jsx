@@ -40,10 +40,8 @@ function App() {
     const [winner, setWinner] = useState(null)
 
     const checkWinner = (newBoard) => {
-
         for (const combo of winnerPatterns) {
             const [a, b, c] = combo
-
             if (
                 newBoard[a] &&
                 newBoard[a] === newBoard[b] &&
@@ -52,16 +50,15 @@ function App() {
                 return newBoard[a]
             }
         }
-
         // if no winner combo yet
         return null
-
     }
 
     const updateBoard = (index) => {
-        if (board[index] || winner) return;   // if the square is current filled, do nothing, return
-
-        setTurn(turn === TURNS.X ? TURNS.O : TURNS.X);  //change turn state from X to O and vice versa 
+        // if the square is current filled, do nothing, return
+        if (board[index] || winner) return;   
+        //change turn state from X to O and vice versa 
+        setTurn(turn === TURNS.X ? TURNS.O : TURNS.X);  
 
         const newBoard = [...board];
         newBoard[index] = turn;
@@ -106,6 +103,18 @@ function App() {
                     {TURNS.O}
                 </Square>
             </section>
+
+            {
+                winner !== null && (
+                    <section className="modal-container">
+                        <h2 className="dialog-text">Winner: </h2>
+                        <div className="modal-square-container">
+                            <Square>{winner}</Square>
+                        </div>
+                        <button>Restart Game?</button>
+                    </section>
+                )
+            }
         </main>
     )
 }

@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center;
     width: 350px;
+    position: relative;
 }
 
 h1 {
@@ -31,6 +32,8 @@ h1 {
     place-content: center;
     cursor: pointer;
     transition: .3s all ease;
+    height: 100%;
+    width: 100%;
 }
 .square:hover {
     transform: scale(1.04);
@@ -59,6 +62,46 @@ h1 {
     color: #000;
 }
 
+.modal-container {
+    position: absolute;
+    background-color: #eeeeee;
+    width: 85%;
+    padding: 30px;
+    border-radius: 15px;
+    row-gap: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.modal-container h2 {
+    margin: 0;
+    align-self: flex-start;
+}
+
+.modal-square-container {
+    width: 70px;
+    height: 70px;
+}
+
+.modal-container button{
+    margin-top: 5px;
+    width: 150px;
+    height: 40px;
+    font-size: 1rem;
+    background-color: #1D1616;
+    border: none;
+    border-radius: 6px;
+    color: #EEEEEE;
+    cursor: pointer;
+    transition: .3s all ease;
+}
+.modal-container button:hover {
+    transform: scale(1.03);
+}
+
+
+
 @media screen and (max-width: 400px) {
     
     h1 {
@@ -81,5 +124,10 @@ h1 {
         height: 60px;
         width: 60px;
         font-size: 1.8rem;
+    }
+
+    .modal-container button {
+        width: 142px;
+        height: 37px;
     }
 }
