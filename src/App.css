@@ -84,7 +84,7 @@ h1 {
     height: 70px;
 }
 
-.modal-container button{
+.reset-btn{
     margin-top: 5px;
     width: 150px;
     height: 40px;
@@ -93,10 +93,11 @@ h1 {
     border: none;
     border-radius: 6px;
     color: #EEEEEE;
+    border: 1px solid #EEEEEE;
     cursor: pointer;
     transition: .3s all ease;
 }
-.modal-container button:hover {
+.reset-btn:hover {
     transform: scale(1.03);
 }
 

@@ -39,6 +39,17 @@ function App() {
     const [turn, setTurn] = useState(TURNS.X);
     const [winner, setWinner] = useState(null)
 
+    const restartGame = () => {
+        setBoard(Array(9).fill(null));
+        setTurn(TURNS.X);
+        setWinner(null);
+
+
+
+    }
+    
+    
+    
     const checkWinner = (newBoard) => {
         for (const combo of winnerPatterns) {
             const [a, b, c] = combo
@@ -73,6 +84,7 @@ function App() {
     return (
         <main className='board'>
             <h1>Tic Tac Toe</h1>
+            <button onClick={restartGame} className="reset-btn">Restart Game?</button>
             <section className='game'>
                 {
                     board.map( (_, index) => {
@@ -111,7 +123,7 @@ function App() {
                         <div className="modal-square-container">
                             <Square>{winner}</Square>
                         </div>
-                        <button>Restart Game?</button>
+                        <button onClick={restartGame} className="reset-btn">Restart Game?</button>
                     </section>
                 )
             }
