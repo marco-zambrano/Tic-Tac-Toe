@@ -12,3 +12,4 @@ It includes features like **LocalStorage** to save game state and a simple yet e
    git clone https://github.com/marco-zambrano/Tic-Tac-Toe.git
    cd Tic-Tac-Toe
    npm install
+   npm run dev
