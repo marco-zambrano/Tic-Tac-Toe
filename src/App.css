@@ -125,6 +125,10 @@ h1 {
     stroke-width: 2.2px;
 }
 
+.draw-text {
+    font-size: 1.3rem;
+}
+
 @media screen and (max-width: 400px) {
     
     h1 {
