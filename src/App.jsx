@@ -12,31 +12,58 @@ import { checkWinner, checkDraw } from "./logic/board.js";
 
 
 function App() {
-    const [board, setBoard] = useState(Array(9).fill(null));
-    const [turn, setTurn] = useState(TURNS.X);
-    const [winner, setWinner] = useState(null);
-    const [visibility, setVisibility] = useState(false);
+    const [board, setBoard] = useState(()=> {
+        const boardFromLocalStorage = window.localStorage.getItem('board'); //verify if something in local storage
+        return boardFromLocalStorage ? JSON.parse(boardFromLocalStorage) :  Array(9).fill(null); //Set the initial array or the local saved
+    });
+
+    const [turn, setTurn] = useState(() => {
+        const turnFromlocalStorage = window.localStorage.getItem('turn');
+        return turnFromlocalStorage ?? TURNS.X;
+    });
+
+    const [winner, setWinner] = useState(() => {
+        const winFromLocalStorage = window.localStorage.getItem('win');
+        return winFromLocalStorage ?? null
+    });
+    const [visibility, setVisibility] = useState(() => {
+        const visibilityFromLocalStorage = window.localStorage.getItem('visibility');
+        return visibilityFromLocalStorage ?? false
+    });
 
     const restartGame = () => {
         setBoard(Array(9).fill(null));
         setTurn(TURNS.X);
         setWinner(null);
         setVisibility(false);
+
+        window.localStorage.removeItem('board');
+        window.localStorage.removeItem('turn');
+        window.localStorage.removeItem('win');
+        window.localStorage.removeItem('visibility');
     }
+
     const changeVisibility = () => {
-        setVisibility(!visibility);
+        const newVisibility = !visibility
+        window.localStorage.setItem('visibility', newVisibility);
+        setVisibility(newVisibility);
     }
     
     const updateBoard = (index) => {
-        if (board[index] || winner) return; // if the square is current filled, do nothing, return
+        if (board[index] || winner) return; // if the square is current filled or there's a win, do nothing, return
         
-        setTurn(turn === TURNS.X ? TURNS.O : TURNS.X);  //change turn state from X to O and vice versa 
+        const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
+        setTurn(newTurn);
 
         const newBoard = [...board];
-        newBoard[index] = turn;
-        setBoard(newBoard); // Set the new board with the new value inserted
+        newBoard[index] = turn; // Insert new value
+        setBoard(newBoard);
 
-        const newWinner = checkWinner(newBoard); // verify winner
+        const newWinner = checkWinner(newBoard);
+        window.localStorage.setItem('win', newWinner);
+        window.localStorage.setItem('board', JSON.stringify(newBoard));
+        window.localStorage.setItem('turn', newTurn);
+        
         if (newWinner) {
             confetti()
             setWinner(newWinner);
@@ -78,7 +105,7 @@ function App() {
                 >
                     {TURNS.X}
                 </Square>
-                
+
                 <Square 
                     isSelected={ turn === TURNS.O } 
                     isTurnSquare
